@@ -10,7 +10,7 @@ const navbar = () => {
     return (
         <Navbar bg="dark" variant="dark">
         <Container>
-        <Navbar.Brand href="#home">Jokes</Navbar.Brand>
+        <Navbar.Brand href="#home">Sandbox</Navbar.Brand>
         <Nav className="me-auto">
           <Nav.Link href="#home">Chuck</Nav.Link>
           <Nav.Link href="#features">Bono</Nav.Link>

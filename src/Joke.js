@@ -10,21 +10,27 @@ import './styles/jokes.css';
 
 const Joke = () => {
     const jokeapi= "https://api.chucknorris.io/jokes/random";
-    const [joke, setjoke] = useState('Funny Joke')
+    const [joke, setJoke] = useState('Funny Joke')
     const [updt, trigger] =useState(0)
 
    useEffect(()=>{
-        getJoke();     
+    if(!navigator.onLine){
+        if(localStorage.getItem("joke") === null) {
+            setJoke("Loading...")
+        } else {
+            setJoke(localStorage.getItem("joke"));
+    }
+    } else {
+        fetch(jokeapi).then(res=>res.json()).then(res=>{
+            setJoke(res.value);
+            localStorage.setItem("joke", res.value);
+        }) 
+    }      
    }, [updt]);
 
     const getJoke = async ()=>{
-        const data = await fetch(jokeapi);
-        const datajson = await data.json();
-
-        //const funny = { value: datajson.value }
-        console.log(datajson.value)
-        //setjoke(funny.value)
-        setjoke(datajson.value)
+ 
+        
         console.log(joke)
     }
     const handleClick = () => trigger(!updt)
@@ -43,7 +49,9 @@ const Joke = () => {
                     Chuck Norri on <cite title="Source Title">Chuck Norris the movie</cite>
                 </footer>
                 </blockquote>
-                <Button variant="secondary" className="funnyLogo" onClick={handleClick}>Update</Button>{' '}
+                <div className="btnBox">
+                    <Button variant="secondary" className="updateBtn" onClick={handleClick}>Update</Button>{' '}
+                </div>
                 <Nikaido />
             </Card.Body>
             </Card>
