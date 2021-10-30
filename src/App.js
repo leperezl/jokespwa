@@ -1,14 +1,14 @@
 import React from 'react';
 //import logo from './logo.svg';
 import './App.css';
-import Nikaido from './nikaido';
+import Joke from './Joke';
 import Navbar from './navbar';
 
 function App() {
   return (
     <div>
-    <Navbar />,
-    <Nikaido />,
+    <Navbar />
+    <Joke />
     </div>
   );
 }

@@ -1,4 +1,27 @@
 .funnyLogo {
     display: flex;
-    size:30rem;
+    justify-content: center;
+    align-items: center;
+    size:10rem;
+    color:white;
+    font-weight: bold;
+    max-width: 5rem;
+    margin-top: 1rem;
+}
+.btnBox {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+.quoteContain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+}
+.quoteBox {
+    display: flex;
+    justify-content: center;
+    max-width: 50%;
+
 }
