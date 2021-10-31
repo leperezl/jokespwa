@@ -19,7 +19,12 @@ const Marvel = () => {
 
 
     useEffect(() => {
-        fetch(apiLink).then( (res)=> res.json).then( (apires) => {
+        fetch(apiLink).then( (apires) => {
+            console.log(apires)
+            console.log("=======================================================")
+            console.log(apires.data)
+            console.log("=======================================================")
+            console.log(apires.data.results)
             const allHeroes = apires?.data?.results?.map((e)=>{
             return {
                 key: e.id,
