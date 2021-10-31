@@ -21,18 +21,13 @@ const Joke = () => {
             setJoke(localStorage.getItem("joke"));
     }
     } else {
-        fetch(jokeapi).then(res=>res.json()).then(res=>{
+        fetch(jokeapi).then((res) => res.json()).then(res=>{
             setJoke(res.value);
             localStorage.setItem("joke", res.value);
         }) 
     }      
    }, [updt]);
 
-    const getJoke = async ()=>{
- 
-        
-        console.log(joke)
-    }
     const handleClick = () => trigger(!updt)
 
     return (
@@ -50,7 +45,7 @@ const Joke = () => {
                 </footer>
                 </blockquote>
                 <div className="btnBox">
-                    <Button variant="secondary" className="updateBtn" onClick={handleClick}>Update</Button>{' '}
+                    <Button variant="secondary" className="funnyLogo" onClick={handleClick}>Update</Button>{' '}
                 </div>
                 <Nikaido />
             </Card.Body>
