@@ -2,6 +2,8 @@ import React from 'react'
 import MD5 from "crypto-js/md5";
 import { useEffect } from 'react';
 import { useState } from 'react'
+import { HeroCard } from './HeroCard';
+import './styles/jokes.css';
 
 const Marvel = () => {
     const apikey= "f3e1054e2cbb15e7a524c4310f30d676"
@@ -19,16 +21,16 @@ const Marvel = () => {
 
 
     useEffect(() => {
-        fetch(apiLink).then( (apires) => {
+        fetch(apiLink).then( (res)=> res.json()).then( (apires) => {
             console.log(apires)
-            console.log("=======================================================")
+            console.log("=================================================")
             console.log(apires.data)
-            console.log("=======================================================")
-            console.log(apires.data.results)
+            //for fun add a link to each heroes comic collection
+
             const allHeroes = apires?.data?.results?.map((e)=>{
             return {
                 key: e.id,
-                image: e.thumbnail.path,
+                image: e.thumbnail.path+"/portrait_incredible.jpg",
                 name: e.name,
                 description: e.description,
                 comicCount: e.comics.available,
@@ -69,10 +71,18 @@ const Marvel = () => {
     //console.log(chain);
     console.log(hash);
     return (
-        <div>
-            <p> hjehe</p>
+        <div className= "container">
+        {heroes?.map( (char) => 
+            (<HeroCard 
+                key= {char.id}
+                image={char.image}
+                name={char.name}
+                description={char.description}
+                comicCount={char.comicCount}
+            />))}
         </div>
-    )
+        )
+    
 }
 
 export default Marvel
