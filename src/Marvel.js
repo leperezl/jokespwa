@@ -21,6 +21,42 @@ const Marvel = () => {
 
 
     useEffect(() => {
+        if(!navigator.onLine){
+            if(localStorage.getItem("Heroes") === null) {
+                setHeroes("Loading...")
+            } else {
+                setHeroes(JSON.parse(localStorage.getItem("Heroes")));
+                console.log(JSON.parse(localStorage.getItem("Heroes")))
+            }
+        } else {
+            fetch(apiLink).then( (res)=> res.json()).then( (apires) => {
+                console.log(apires)
+                console.log("=================================================")
+                console.log(apires.data)
+                //for fun add a link to each heroes comic collection
+    
+                const allHeroes = apires?.data?.results?.map((e)=>{
+                return {
+                    key: e.id,
+                    image: e.thumbnail.path+"/portrait_incredible.jpg",
+                    name: e.name,
+                    description: e.description,
+                    comicCount: e.comics.available,
+                }
+                })
+        
+            setHeroes(allHeroes);
+            setDate(Date.now().toString());
+            setHash(MD5(date+priv+apikey).toString())
+            setLink(linkBase+"ts="+date+"&apikey="+apikey+"&hash="+hash)
+            localStorage.setItem("Heroes", JSON.stringify(allHeroes));
+            })           
+    
+        }
+
+    }, [])
+
+    const  fetchInfo = async ()=>{
         fetch(apiLink).then( (res)=> res.json()).then( (apires) => {
             console.log(apires)
             console.log("=================================================")
@@ -44,28 +80,6 @@ const Marvel = () => {
         console.log(allHeroes);
         console.log(apiLink)
         })
-
-    }, [])
-
-    const  fetchInfo = async ()=>{
-        fetch(apiLink).then( (res)=> res.json).then( (apires) => {
-            const allHeroes = apires?.data?.results?.map((e)=>{
-                return {
-                    key: e.id,
-                    image: e.thumbnail.path,
-                    name: e.name,
-                    description: e.description,
-                    comicCount: e.comics.available,
-                }
-                })
-        
-            setHeroes(allHeroes);
-            setDate(Date.now().toString());
-            setHash(MD5(date+priv+apikey).toString())
-            setLink(linkBase+"ts="+date+"&apikey="+apikey+"&hash="+hash)
-            console.log(allHeroes);
-            console.log(apiLink)
-            })
     }
 
     //console.log(chain);

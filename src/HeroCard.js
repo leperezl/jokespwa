@@ -13,10 +13,10 @@ export const HeroCard = (props) => {
                 <Card.Body>
                     <Card.Title>{props.name}</Card.Title>
                     <Card.Text>
-                    Gender: {props.description}
+                    Description: {props.description}
                     </Card.Text>
                     <Card.Text>
-                    Status: {props.comicCount}
+                    Comics: {props.comicCount}
                     </Card.Text>
                     <Nikaido />
                 </Card.Body>
